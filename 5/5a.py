@@ -2,6 +2,7 @@ import sys
 
 
 def main():
+    #Reading file
     with open('input.txt') as f:
         linecount = sum(1 for _ in f)
     #print(linecount)
@@ -30,8 +31,8 @@ def main():
     #removing space on the end of first 6 maps, last map does not have a space at the end
     for i in range(0,6):
         maps[i].pop()
-    #print(maps)
 
+    #create maps
     seedToSoilMap = createMap(maps,0)
     soilToFerMap = createMap(maps,1)
     ferToWaterMap = createMap(maps,2)
@@ -39,63 +40,32 @@ def main():
     lightToTempMap = createMap(maps,4)
     tempToHumidMap = createMap(maps,5)
     humidToLocMap = createMap(maps,6)
-    locs = []
+
+    #Removing the seed title and formatting strings to ints
     seeds.pop(0)
     seeds = [int(i) for i in seeds]
+
+    locs = []
     for seed in seeds:
-        #seeds = [int(x) for x in seedRange]
-        soil = -1
-        fer = -1
-        water = -1
-        light = -1
-        temp = -1
-        humid = -1
-        loc = -1
-        for x in seedToSoilMap:
-            if(seed in x):
-                soil = seedToSoilMap[x][x.index(seed)]
-        if(soil ==-1):
-            soil = seed
-
-        for x in soilToFerMap:
-            if(soil in x):
-                fer = soilToFerMap[x][x.index(soil)]
-        if(fer ==-1):
-            fer = soil
-
-        for x in ferToWaterMap:
-            if(fer in x):
-                water = ferToWaterMap[x][x.index(fer)]
-        if(water ==-1):
-            water = fer
-
-        for x in waterToLightMap:
-            if(water in x):
-                light = waterToLightMap[x][x.index(water)]
-        if(light ==-1):
-            light = water
-
-        for x in lightToTempMap:
-            if(light in x):
-                temp = lightToTempMap[x][x.index(light)]
-        if(temp ==-1):
-            temp = light
-
-        for x in tempToHumidMap:
-            if(temp in x):
-                humid = tempToHumidMap[x][x.index(temp)]
-        if(humid ==-1):
-            humid = temp
-
-        for x in humidToLocMap:
-            if(humid in x):
-                loc = humidToLocMap[x][x.index(humid)]
-        if(loc ==-1):
-            loc = humid
+        soil = readMap(seedToSoilMap,seed)
+        fer = readMap(soilToFerMap,soil)
+        water = readMap(ferToWaterMap,fer)
+        light = readMap(waterToLightMap,water)
+        temp = readMap(lightToTempMap,light)
+        humid = readMap(tempToHumidMap,temp)
+        loc = readMap(humidToLocMap,humid)
         locs.append(loc)
     print("Lowest Location")
     print(min(locs))
 
+def readMap(map, src):
+    dest = -1
+    for x in map:
+        if (src in x):
+            dest = map[x][x.index(src)]
+    if (dest == -1):
+        dest = src
+    return dest
 
 def createMap(maps,i):
     list = maps[i]
