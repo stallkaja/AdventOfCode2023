@@ -41,65 +41,58 @@ def main():
     humidToLocMap = createMap(maps,6)
     locs = []
     seeds.pop(0)
+    seeds = [int(i) for i in seeds]
+    for seed in seeds:
+        #seeds = [int(x) for x in seedRange]
+        soil = -1
+        fer = -1
+        water = -1
+        light = -1
+        temp = -1
+        humid = -1
+        loc = -1
+        for x in seedToSoilMap:
+            if(seed in x):
+                soil = seedToSoilMap[x][x.index(seed)]
+        if(soil ==-1):
+            soil = seed
 
-    #seed ranges
-    seedRanges = []
-    for i in range(0,len(seeds),2):
+        for x in soilToFerMap:
+            if(soil in x):
+                fer = soilToFerMap[x][x.index(soil)]
+        if(fer ==-1):
+            fer = soil
 
-        seedRanges.append(range(int(seeds[i]),int(seeds[i+1])+int(seeds[i])))
+        for x in ferToWaterMap:
+            if(fer in x):
+                water = ferToWaterMap[x][x.index(fer)]
+        if(water ==-1):
+            water = fer
 
-    for seedRange in seedRanges:
-        for seed in seedRange:
-            #seeds = [int(x) for x in seedRange]
-            soil = -1
-            fer = -1
-            water = -1
-            light = -1
-            temp = -1
-            humid = -1
-            loc = -1
-            for x in seedToSoilMap:
-                if(seed in x):
-                    soil = seedToSoilMap[x][x.index(seed)]
-            if(soil ==-1):
-                soil = seed
+        for x in waterToLightMap:
+            if(water in x):
+                light = waterToLightMap[x][x.index(water)]
+        if(light ==-1):
+            light = water
 
-            for x in soilToFerMap:
-                if(soil in x):
-                    fer = soilToFerMap[x][x.index(soil)]
-            if(fer ==-1):
-                fer = soil
+        for x in lightToTempMap:
+            if(light in x):
+                temp = lightToTempMap[x][x.index(light)]
+        if(temp ==-1):
+            temp = light
 
-            for x in ferToWaterMap:
-                if(fer in x):
-                    water = ferToWaterMap[x][x.index(fer)]
-            if(water ==-1):
-                water = fer
+        for x in tempToHumidMap:
+            if(temp in x):
+                humid = tempToHumidMap[x][x.index(temp)]
+        if(humid ==-1):
+            humid = temp
 
-            for x in waterToLightMap:
-                if(water in x):
-                    light = waterToLightMap[x][x.index(water)]
-            if(light ==-1):
-                light = water
-
-            for x in lightToTempMap:
-                if(light in x):
-                    temp = lightToTempMap[x][x.index(light)]
-            if(temp ==-1):
-                temp = light
-
-            for x in tempToHumidMap:
-                if(temp in x):
-                    humid = tempToHumidMap[x][x.index(temp)]
-            if(humid ==-1):
-                humid = temp
-
-            for x in humidToLocMap:
-                if(humid in x):
-                    loc = humidToLocMap[x][x.index(humid)]
-            if(loc ==-1):
-                loc = humid
-            locs.append(loc)
+        for x in humidToLocMap:
+            if(humid in x):
+                loc = humidToLocMap[x][x.index(humid)]
+        if(loc ==-1):
+            loc = humid
+        locs.append(loc)
     print("Lowest Location")
     print(min(locs))
 
