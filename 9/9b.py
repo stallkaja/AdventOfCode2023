@@ -18,9 +18,15 @@ def main():
             curLine = nextLine
         historyLen = len(history) - 1
         history[historyLen] = history[historyLen] + [0]
+        #print(history)
         for i in range(0, historyLen):
-            history[historyLen - i - 1] = history[historyLen - i - 1] + [next(reversed(history[(historyLen - i) - 1])) + next(reversed(history[historyLen - i]))]
-        total += (next(reversed(history[0])))
+            #print(history[historyLen - i])
+            newNum = (history[(historyLen - i) - 1])[0] - (history[historyLen - i])[0]
+            history[(historyLen - i) - 1].insert(0, newNum)
+            #print("newNum to be appened")
+            #print(newNum)
+        print(history[0][0])
+        total += history[0][0]
     print("Total: " + str(total))
 
 
