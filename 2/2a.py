@@ -4,12 +4,13 @@ import sys
 def main():
     f = open("input.txt","r")
     lines =(f.readlines())
+    print(lines)
     rMax = 12
     gMax = 13
     bMax = 14
     gameSum=0
     for line in lines:
-        gameFlag = 1;
+        gameFlag = 1
         #print(line)
         cleanedLine = line.split(":")
         #print("cleaned line is: " + cleanedLine[1])
@@ -31,7 +32,7 @@ def main():
                     print('too many blues')
                     gameFlag =0
                 elif(('red' in color)and(qty > rMax)):
-                    print('too manr reds')
+                    print('too many reds')
                     gameFlag =0
                 elif(('green' in color)and(qty > gMax)):
                     print('too many green')

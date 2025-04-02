@@ -4,7 +4,7 @@ import sys
 def main():
     f = open("input.txt","r")
     lines =(f.readlines())
-
+    print(lines)
     gameSum=0
     for line in lines:
         rMax = 0

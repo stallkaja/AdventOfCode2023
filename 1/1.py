@@ -9,6 +9,7 @@ def main():
         length = len(line)-1
         first = length
         last = 0
+        a = x
         index = 0
         digits = ['one','two','three','four','five','six','seven','eight','nine']
         word2Num = {'one':1,
